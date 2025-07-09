@@ -8,7 +8,7 @@ models:
   - google/medgemma-27b-text-it
 pinned: false
 license: apache-2.0
-short_description: 'Simulated Pre-visit Intake Demo built using MedGemma Demo'
+short_description: 'Simulated Pre-visit Intake Demo built using MedGemma'
 ---
 
 ## Table of Contents
