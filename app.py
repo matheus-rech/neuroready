@@ -20,9 +20,13 @@ from gemini import gemini_get_text_response
 from interview_simulator import stream_interview
 from cache import create_cache_zip
 from medgemma import medgemma_get_text_response
+from neuro_api import register_neuro_routes
 
 app = Flask(__name__, static_folder=os.environ.get("FRONTEND_BUILD", "frontend/build"), static_url_path="/")
 CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+
+# Register neurological API routes
+app = register_neuro_routes(app)
 
 @app.route("/")
 def serve():

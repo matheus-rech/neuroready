@@ -1,0 +1,40 @@
+.
+├── frontend
+│   ├── public
+│   │   ├── assets
+│   │   └── index.html
+│   ├── src
+│   │   ├── components
+│   │   ├── shared
+│   │   ├── App.js
+│   │   └── index.js
+│   ├── package-lock.json
+│   └── package.json
+├── ANALYSIS.md
+├── Dockerfile
+├── FILE_STRUCTURE.txt
+├── INTEGRATION_GUIDE.md
+├── NEUROREADY_README.md
+├── PERSONALIZATION_SUMMARY.md
+├── QUICKSTART.md
+├── README.md
+├── __init__.py
+├── app.py
+├── auth.py
+├── cache.py
+├── cache_archive.zip
+├── evaluation.py
+├── gemini.py
+├── gemini_tts.py
+├── interview_simulator.py
+├── medgemma.py
+├── neuro_api.py
+├── neuro_interview.py
+├── neuro_patients.json
+├── neuro_symptoms.json
+├── report_template.txt
+├── requirements.txt
+├── run_local.sh
+└── symptoms.json
+
+6 directories, 31 files

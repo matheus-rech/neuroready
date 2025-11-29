@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroReady - Standalone Neurological Assessment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .patient-grid, .condition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .patient-card, .condition-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .patient-card:hover, .condition-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .patient-card.selected, .condition-card.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .patient-card h3, .condition-card h3 {
+            color: #333;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        .patient-card p, .condition-card p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .interview-section {
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .interview-section.active {
+            display: grid;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.interviewer {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+        }
+
+        .message.patient {
+            background: #f3e5f5;
+            border-left: 4px solid #9c27b0;
+        }
+
+        .message strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+
+        .neuro-viz {
+            background: #f9f9f9;
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 400px;
+        }
+
+        .findings-list {
+            list-style: none;
+        }
+
+        .findings-list li {
+            padding: 10px;
+            margin-bottom: 8px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .syndrome-match {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .syndrome-match h3 {
+            margin-bottom: 10px;
+        }
+
+        .confidence {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .report-section {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .report-section.active {
+            display: block;
+        }
+
+        .report-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+        }
+
+        .back-btn {
+            background: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .chat-container {
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .chat-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .chat-container::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .badge.cn {
+            background: #ffeb3b;
+            color: #333;
+        }
+
+        .badge.tract {
+            background: #ff9800;
+            color: white;
+        }
+
+        .badge.level {
+            background: #4caf50;
+            color: white;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .main-content, .interview-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🧠 NeuroReady</h1>
+            <p>Neurological Assessment with Real-Time Localization - Standalone Version</p>
+        </div>
+
+        <!-- Patient & Condition Selection -->
+        <div id="selectionView" class="main-content">
+            <div class="card">
+                <h2>Select a Patient</h2>
+                <div class="patient-grid" id="patientGrid"></div>
+            </div>
+
+            <div class="card">
+                <h2>Select a Condition</h2>
+                <div class="condition-grid" id="conditionGrid"></div>
+                <button class="btn" id="startBtn" disabled>Start Neurological Assessment</button>
+            </div>
+        </div>
+
+        <!-- Interview View -->
+        <div id="interviewView" class="interview-section">
+            <div class="card">
+                <button class="btn back-btn" id="backBtn">← Back to Selection</button>
+                <h2>Clinical Interview</h2>
+                <div class="chat-container" id="chatContainer"></div>
+            </div>
+
+            <div class="card">
+                <h2>Real-Time Localization</h2>
+                <div class="neuro-viz" id="neuroViz">
+                    <h3>Neurological Findings</h3>
+                    <ul class="findings-list" id="findingsList"></ul>
+                    <div id="syndromeMatch"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Report View -->
+        <div id="reportView" class="report-section">
+            <div class="card">
+                <button class="btn back-btn" id="backToSelectionBtn">← Start New Assessment</button>
+                <h2>Neurological Assessment Report</h2>
+                <div class="report-content" id="reportContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== DATA =====
+        const PATIENTS = [
+            {
+                id: 1,
+                name: "Robert Chen",
+                age: 68,
+                gender: "Male",
+                condition: "Hypertension and Type 2 Diabetes",
+                history: "68-year-old male with history of hypertension (on Lisinopril 20mg daily) and type 2 diabetes (on Metformin 1000mg BID). Recent BP 145/88, HbA1c 7.2%. No prior stroke."
+            },
+            {
+                id: 2,
+                name: "Maria Santos",
+                age: 72,
+                gender: "Female",
+                condition: "Atrial Fibrillation",
+                history: "72-year-old female with atrial fibrillation (on Apixaban 5mg BID) and hypertension. History of paroxysmal AF diagnosed 3 years ago. No prior stroke."
+            },
+            {
+                id: 3,
+                name: "James Wilson",
+                age: 65,
+                gender: "Male",
+                condition: "Poorly Controlled Hypertension",
+                history: "65-year-old male with poorly controlled hypertension (BP often 160-170/90-100). Active smoker, 40 pack-year history. Mild bilateral carotid stenosis."
+            },
+            {
+                id: 4,
+                name: "Linda Martinez",
+                age: 58,
+                gender: "Female",
+                condition: "Hypertension and Hyperlipidemia",
+                history: "58-year-old female with hypertension and hyperlipidemia. Type 2 diabetes diagnosed 2 years ago, well-controlled. BMI 32."
+            }
+        ];
+
+        const CONDITIONS = [
+            {
+                id: "weber",
+                name: "Weber Syndrome",
+                description: "Midbrain stroke with ipsilateral CN III palsy and contralateral hemiparesis",
+                level: "midbrain",
+                symptoms: [
+                    "I woke up this morning and my left eyelid was drooping",
+                    "My left eye seems to be looking down and out, and I'm seeing double",
+                    "My right arm and leg feel very weak",
+                    "I can't lift my right arm properly",
+                    "My left pupil looks bigger than the right one"
+                ],
+                findings: {
+                    cranialNerves: [{cn: "CN III", name: "Oculomotor", side: "left"}],
+                    tracts: [{name: "Corticospinal Tract", side: "right", type: "motor"}],
+                    level: "midbrain"
+                }
+            },
+            {
+                id: "wallenberg",
+                name: "Wallenberg Syndrome",
+                description: "Lateral medullary syndrome with ipsilateral facial sensory loss and contralateral body sensory loss",
+                level: "medulla",
+                symptoms: [
+                    "I suddenly felt very dizzy and the room was spinning",
+                    "The left side of my face feels numb",
+                    "I'm having trouble swallowing",
+                    "My voice sounds hoarse",
+                    "The right side of my body feels numb to pain and temperature",
+                    "I feel very unsteady when I try to walk"
+                ],
+                findings: {
+                    cranialNerves: [
+                        {cn: "CN V", name: "Trigeminal", side: "left"},
+                        {cn: "CN IX", name: "Glossopharyngeal", side: "left"},
+                        {cn: "CN X", name: "Vagus", side: "left"}
+                    ],
+                    tracts: [{name: "Spinothalamic Tract", side: "right", type: "sensory"}],
+                    additional: [{name: "Horner's Syndrome", side: "left"}, {name: "Ataxia", side: "left"}],
+                    level: "medulla"
+                }
+            },
+            {
+                id: "millard-gubler",
+                name: "Millard-Gubler Syndrome",
+                description: "Ventral pontine stroke with ipsilateral CN VI and CN VII palsy",
+                level: "pons",
+                symptoms: [
+                    "I can't move the left side of my face",
+                    "My left eye won't move outward",
+                    "I'm seeing double when I look to the left",
+                    "My right arm and leg are very weak",
+                    "I can't close my left eye completely"
+                ],
+                findings: {
+                    cranialNerves: [
+                        {cn: "CN VI", name: "Abducens", side: "left"},
+                        {cn: "CN VII", name: "Facial", side: "left"}
+                    ],
+                    tracts: [{name: "Corticospinal Tract", side: "right", type: "motor"}],
+                    level: "pons"
+                }
+            },
+            {
+                id: "lateral-pontine",
+                name: "Lateral Pontine Syndrome",
+                description: "AICA territory infarction with ipsilateral CN VII, CN VIII palsy",
+                level: "pons",
+                symptoms: [
+                    "I suddenly lost hearing in my left ear",
+                    "I have severe ringing in my left ear",
+                    "The room is spinning and I feel very dizzy",
+                    "The left side of my face is drooping",
+                    "I'm very unsteady and keep falling to the left",
+                    "The right side of my body feels numb to pain"
+                ],
+                findings: {
+                    cranialNerves: [
+                        {cn: "CN VII", name: "Facial", side: "left"},
+                        {cn: "CN VIII", name: "Vestibulocochlear", side: "left"}
+                    ],
+                    tracts: [{name: "Spinothalamic Tract", side: "right", type: "sensory"}],
+                    additional: [{name: "Ataxia", side: "left"}],
+                    level: "pons"
+                }
+            }
+        ];
+
+        const CRANIAL_NERVES = {
+            "CN I": {name: "Olfactory", level: "forebrain"},
+            "CN II": {name: "Optic", level: "forebrain"},
+            "CN III": {name: "Oculomotor", level: "midbrain"},
+            "CN IV": {name: "Trochlear", level: "midbrain"},
+            "CN V": {name: "Trigeminal", level: "pons"},
+            "CN VI": {name: "Abducens", level: "pons"},
+            "CN VII": {name: "Facial", level: "pons"},
+            "CN VIII": {name: "Vestibulocochlear", level: "pons"},
+            "CN IX": {name: "Glossopharyngeal", level: "medulla"},
+            "CN X": {name: "Vagus", level: "medulla"},
+            "CN XI": {name: "Accessory", level: "medulla"},
+            "CN XII": {name: "Hypoglossal", level: "medulla"}
+        };
+
+        // ===== STATE =====
+        let selectedPatient = null;
+        let selectedCondition = null;
+        let currentMessages = [];
+        let currentFindings = {
+            cranialNerves: [],
+            tracts: [],
+            additional: [],
+            level: null
+        };
+
+        // ===== UI FUNCTIONS =====
+        function renderPatients() {
+            const grid = document.getElementById('patientGrid');
+            grid.innerHTML = PATIENTS.map(patient => `
+                <div class="patient-card" data-id="${patient.id}">
+                    <h3>${patient.name}</h3>
+                    <p>${patient.age} years, ${patient.gender}</p>
+                    <p><small>${patient.condition}</small></p>
+                </div>
+            `).join('');
+
+            grid.querySelectorAll('.patient-card').forEach(card => {
+                card.addEventListener('click', () => selectPatient(parseInt(card.dataset.id)));
+            });
+        }
+
+        function renderConditions() {
+            const grid = document.getElementById('conditionGrid');
+            grid.innerHTML = CONDITIONS.map(condition => `
+                <div class="condition-card" data-id="${condition.id}">
+                    <h3>${condition.name}</h3>
+                    <p>${condition.description}</p>
+                </div>
+            `).join('');
+
+            grid.querySelectorAll('.condition-card').forEach(card => {
+                card.addEventListener('click', () => selectCondition(card.dataset.id));
+            });
+        }
+
+        function selectPatient(id) {
+            selectedPatient = PATIENTS.find(p => p.id === id);
+            document.querySelectorAll('.patient-card').forEach(card => {
+                card.classList.toggle('selected', parseInt(card.dataset.id) === id);
+            });
+            updateStartButton();
+        }
+
+        function selectCondition(id) {
+            selectedCondition = CONDITIONS.find(c => c.id === id);
+            document.querySelectorAll('.condition-card').forEach(card => {
+                card.classList.toggle('selected', card.dataset.id === id);
+            });
+            updateStartButton();
+        }
+
+        function updateStartButton() {
+            const btn = document.getElementById('startBtn');
+            btn.disabled = !(selectedPatient && selectedCondition);
+        }
+
+        function addMessage(role, content) {
+            const container = document.getElementById('chatContainer');
+            const message = document.createElement('div');
+            message.className = `message ${role}`;
+            message.innerHTML = `
+                <strong>${role === 'interviewer' ? 'Clinical Assistant' : 'Patient'}</strong>
+                ${content}
+            `;
+            container.appendChild(message);
+            container.scrollTop = container.scrollHeight;
+            currentMessages.push({role, content});
+        }
+
+        function updateFindings(findings) {
+            currentFindings = findings;
+            const list = document.getElementById('findingsList');
+            list.innerHTML = '';
+
+            // Add cranial nerves
+            findings.cranialNerves.forEach(cn => {
+                const li = document.createElement('li');
+                li.innerHTML = `<span class="badge cn">${cn.cn}</span> ${cn.name} - ${cn.side} side`;
+                list.appendChild(li);
+            });
+
+            // Add tracts
+            findings.tracts.forEach(tract => {
+                const li = document.createElement('li');
+                li.innerHTML = `<span class="badge tract">Tract</span> ${tract.name} - ${tract.side} side (${tract.type})`;
+                list.appendChild(li);
+            });
+
+            // Add additional findings
+            if (findings.additional) {
+                findings.additional.forEach(add => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<span class="badge">Finding</span> ${add.name} - ${add.side} side`;
+                    list.appendChild(li);
+                });
+            }
+
+            // Add level
+            if (findings.level) {
+                const li = document.createElement('li');
+                li.innerHTML = `<span class="badge level">Level</span> Lesion at ${findings.level.toUpperCase()}`;
+                list.appendChild(li);
+            }
+
+            // Update syndrome match
+            updateSyndromeMatch();
+        }
+
+        function updateSyndromeMatch() {
+            const container = document.getElementById('syndromeMatch');
+            if (selectedCondition) {
+                container.innerHTML = `
+                    <div class="syndrome-match">
+                        <h3>🎯 Syndrome Match</h3>
+                        <p><strong>${selectedCondition.name}</strong></p>
+                        <p>${selectedCondition.description}</p>
+                        <p class="confidence">Confidence: High (based on constellation of findings)</p>
+                    </div>
+                `;
+            }
+        }
+
+        // ===== INTERVIEW SIMULATION =====
+        async function startInterview() {
+            // Switch views
+            document.getElementById('selectionView').style.display = 'none';
+            document.getElementById('interviewView').classList.add('active');
+            document.getElementById('chatContainer').innerHTML = '';
+            document.getElementById('findingsList').innerHTML = '';
+            document.getElementById('syndromeMatch').innerHTML = '';
+
+            // Introduction
+            await delay(500);
+            addMessage('interviewer', `Hello, I'm the clinical assistant. I understand you're ${selectedPatient.name}, a ${selectedPatient.age}-year-old ${selectedPatient.gender}. Can you tell me what brought you in today?`);
+
+            await delay(1500);
+            addMessage('patient', selectedCondition.symptoms[0]);
+
+            // Systematic questioning
+            await delay(1500);
+            addMessage('interviewer', "I see. Let me ask you some specific questions to understand better. Can you describe any other symptoms you've been experiencing?");
+
+            // Add symptoms progressively
+            for (let i = 1; i < selectedCondition.symptoms.length; i++) {
+                await delay(2000);
+                addMessage('patient', selectedCondition.symptoms[i]);
+                
+                // Update findings progressively
+                const partialFindings = {
+                    cranialNerves: selectedCondition.findings.cranialNerves.slice(0, Math.min(i, selectedCondition.findings.cranialNerves.length)),
+                    tracts: i > 2 ? selectedCondition.findings.tracts : [],
+                    additional: i > 3 && selectedCondition.findings.additional ? selectedCondition.findings.additional : [],
+                    level: i > 2 ? selectedCondition.findings.level : null
+                };
+                updateFindings(partialFindings);
+            }
+
+            // Neurological examination
+            await delay(2000);
+            addMessage('interviewer', "Thank you for that information. Let me perform a brief neurological examination. I'll test your cranial nerves, motor strength, sensory function, and coordination.");
+
+            await delay(2000);
+            addMessage('patient', "Okay, doctor.");
+
+            await delay(2000);
+            updateFindings(selectedCondition.findings);
+
+            // Summary
+            await delay(2000);
+            addMessage('interviewer', "Based on your symptoms and examination findings, I'm identifying a specific pattern of neurological deficits. Let me compile a comprehensive report for the attending physician.");
+
+            await delay(2000);
+            generateReport();
+        }
+
+        function generateReport() {
+            const report = `
+NEUROLOGICAL ASSESSMENT REPORT
+
+Patient Information:
+Name: ${selectedPatient.name}
+Age: ${selectedPatient.age} years
+Gender: ${selectedPatient.gender}
+Medical History: ${selectedPatient.condition}
+
+Chief Complaint:
+Patient presents with acute onset neurological symptoms.
+
+History of Present Illness:
+${selectedCondition.symptoms.join(' ')}
+
+Neurological Examination:
+
+Cranial Nerves:
+${currentFindings.cranialNerves.map(cn => `- ${cn.cn} (${cn.name}): Deficit noted on ${cn.side} side`).join('\n')}
+
+Motor System:
+${currentFindings.tracts.filter(t => t.type === 'motor').map(t => `- ${t.name}: Weakness on ${t.side} side`).join('\n') || '- No motor deficits noted'}
+
+Sensory System:
+${currentFindings.tracts.filter(t => t.type === 'sensory').map(t => `- ${t.name}: Sensory loss on ${t.side} side`).join('\n') || '- No sensory deficits noted'}
+
+Additional Findings:
+${currentFindings.additional && currentFindings.additional.length > 0 ? currentFindings.additional.map(a => `- ${a.name} on ${a.side} side`).join('\n') : '- None noted'}
+
+Localization:
+Lesion level: ${currentFindings.level ? currentFindings.level.toUpperCase() : 'Unable to localize'}
+
+Clinical Impression:
+${selectedCondition.name}
+
+Description:
+${selectedCondition.description}
+
+This constellation of findings is consistent with a ${currentFindings.level} lesion affecting the ${selectedCondition.name.toLowerCase()} pattern.
+
+Recommendations:
+1. Urgent neuroimaging (MRI brain with DWI)
+2. Neurology consultation
+3. Stroke protocol activation if within therapeutic window
+4. Monitor vital signs and neurological status
+5. Consider vascular risk factor assessment
+
+Generated by: NeuroReady Clinical Assistant
+Date: ${new Date().toLocaleDateString()}
+Time: ${new Date().toLocaleTimeString()}
+            `;
+
+            document.getElementById('reportContent').textContent = report;
+            document.getElementById('interviewView').classList.remove('active');
+            document.getElementById('reportView').classList.add('active');
+        }
+
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // ===== EVENT LISTENERS =====
+        document.getElementById('startBtn').addEventListener('click', startInterview);
+
+        document.getElementById('backBtn').addEventListener('click', () => {
+            document.getElementById('interviewView').classList.remove('active');
+            document.getElementById('selectionView').style.display = 'grid';
+        });
+
+        document.getElementById('backToSelectionBtn').addEventListener('click', () => {
+            document.getElementById('reportView').classList.remove('active');
+            document.getElementById('selectionView').style.display = 'grid';
+            selectedPatient = null;
+            selectedCondition = null;
+            document.querySelectorAll('.patient-card, .condition-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            updateStartButton();
+        });
+
+        // ===== INITIALIZATION =====
+        renderPatients();
+        renderConditions();
+    </script>
+</body>
+</html>

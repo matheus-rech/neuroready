@@ -10,7 +10,7 @@ from anthropic import Anthropic
 class AIConversation:
     def __init__(self):
         self.client = Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
-        self.model = "claude-3-5-sonnet-20241022"
+        self.model = "claude-3-5-sonnet-20240620"
         
     def create_interviewer_prompt(self, patient, condition):
         """Create system prompt for the clinical interviewer"""
