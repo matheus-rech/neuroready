@@ -1,0 +1,48 @@
+# Build React app
+FROM node:24-slim AS frontend-build
+WORKDIR /app/frontend
+RUN npm install -g npm@11.4.x
+COPY frontend/ ./
+RUN npm install
+RUN npm run build
+
+# Python backend with AI
+FROM python:3.11-slim
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements and install
+COPY requirements-deploy.txt ./
+RUN pip install --no-cache-dir -r requirements-deploy.txt
+
+# Copy AI application files
+COPY app_ai.py ./
+COPY ai_conversation.py ./
+COPY tts_service.py ./
+COPY neuro_api.py ./
+COPY neuro_interview.py ./
+COPY neuro_patients.json ./
+COPY neuro_symptoms.json ./
+
+# Copy original files needed
+COPY symptoms.json ./
+
+# Copy built React app
+COPY --from=frontend-build /app/frontend/build ./frontend/build
+COPY frontend/public/assets ./frontend/public/assets
+
+# Create cache directory
+RUN mkdir -p /cache && chmod 777 /cache
+ENV CACHE_DIR=/cache
+ENV FRONTEND_BUILD=/app/frontend/build
+
+# Expose port
+EXPOSE 7860
+
+# Run with gunicorn
+CMD ["gunicorn", "-b", "0.0.0.0:7860", "app_ai:app", "--threads", "4", "--timeout", "300", "--workers", "2"]

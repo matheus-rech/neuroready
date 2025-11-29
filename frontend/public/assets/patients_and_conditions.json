@@ -35,12 +35,52 @@
             "headshot": "/assets/sacha_150.avif",
             "fhirFile": "/assets/sacha_fhir.json",
             "voice": "Callirrhoe"
+        },
+        {
+            "id": 4,
+            "name": "Robert Chen",
+            "age": 68,
+            "gender": "Male",
+            "existing_condition": "Hypertension and Type 2 Diabetes",
+            "img": "/assets/jordan.avif",
+            "video": "/assets/jordan.mp4",
+            "headshot": "/assets/jordan_300.avif",
+            "fhirFile": "/assets/fhir-robert-chen.json",
+            "voice": "Algenib"
+        },
+        {
+            "id": 5,
+            "name": "Maria Santos",
+            "age": 72,
+            "gender": "Female",
+            "existing_condition": "Atrial Fibrillation and Hypertension",
+            "img": "/assets/alex.avif",
+            "video": "/assets/alex.mp4",
+            "headshot": "/assets/alex_300.avif",
+            "fhirFile": "/assets/alex_fhir.json",
+            "voice": "Gacrux"
+        },
+        {
+            "id": 6,
+            "name": "James Wilson",
+            "age": 65,
+            "gender": "Male",
+            "existing_condition": "Poorly Controlled Hypertension and Smoking",
+            "img": "/assets/jordan.avif",
+            "video": "/assets/jordan.mp4",
+            "headshot": "/assets/jordan_300.avif",
+            "fhirFile": "/assets/alex_fhir.json",
+            "voice": "Algenib"
         }
     ],
     "conditions": [
         { "name": "Flu", "description": "A common and contagious respiratory illness caused by a virus that can lead to fever, body aches, and fatigue." },
         { "name": "Malaria", "description": "A serious disease spread by mosquitoes that causes recurring fevers and chills due to a parasite infecting red blood cells." },
         { "name": "Migraine", "description": "A type of severe headache often accompanied by throbbing pain, sensitivity to light and sound, and sometimes nausea." },
-        { "name": "Serotonin Syndrome", "description": "A potentially dangerous reaction caused by too much serotonin in the brain, often due to certain medications, leading to symptoms like agitation, rapid heart rate, and confusion." }
+        { "name": "Serotonin Syndrome", "description": "A potentially dangerous reaction caused by too much serotonin in the brain, often due to certain medications, leading to symptoms like agitation, rapid heart rate, and confusion." },
+        { "name": "Weber Syndrome", "description": "Midbrain stroke affecting cerebral peduncle with ipsilateral CN III palsy and contralateral hemiparesis" },
+        { "name": "Wallenberg Syndrome", "description": "Lateral medullary syndrome (PICA territory) with ipsilateral facial sensory loss, Horner's, ataxia, and contralateral body sensory loss" },
+        { "name": "Millard-Gubler Syndrome", "description": "Ventral pontine stroke with ipsilateral CN VI and CN VII palsy and contralateral hemiparesis" },
+        { "name": "Lateral Pontine Syndrome", "description": "AICA territory infarction with ipsilateral CN VII, CN VIII palsy, ataxia, and contralateral pain/temperature loss" }
     ]
 }

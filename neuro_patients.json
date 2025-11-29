@@ -1,0 +1,100 @@
+{
+  "patients": [
+    {
+      "name": "Robert Chen",
+      "age": 68,
+      "gender": "male",
+      "existing_condition": "hypertension and type 2 diabetes",
+      "avatar": "/assets/patient-avatar-1.mp4",
+      "conditions": [
+        {
+          "id": "weber",
+          "name": "Weber Syndrome",
+          "description": "Midbrain stroke affecting cerebral peduncle",
+          "reference_diagnosis": "Left midbrain infarction (Weber syndrome) with ipsilateral CN III palsy and contralateral hemiparesis"
+        }
+      ],
+      "fhirFile": "/assets/fhir-robert-chen.json"
+    },
+    {
+      "name": "Maria Santos",
+      "age": 72,
+      "gender": "female",
+      "existing_condition": "atrial fibrillation and hypertension",
+      "avatar": "/assets/patient-avatar-2.mp4",
+      "conditions": [
+        {
+          "id": "wallenberg",
+          "name": "Wallenberg Syndrome",
+          "description": "Lateral medullary syndrome (PICA territory)",
+          "reference_diagnosis": "Left lateral medullary infarction (Wallenberg syndrome) with ipsilateral facial sensory loss, Horner's syndrome, ataxia, and contralateral body sensory loss"
+        }
+      ],
+      "fhirFile": "/assets/fhir-maria-santos.json"
+    },
+    {
+      "name": "James Wilson",
+      "age": 65,
+      "gender": "male",
+      "existing_condition": "poorly controlled hypertension and smoking history",
+      "avatar": "/assets/patient-avatar-3.mp4",
+      "conditions": [
+        {
+          "id": "millard-gubler",
+          "name": "Millard-Gubler Syndrome",
+          "description": "Ventral pontine stroke",
+          "reference_diagnosis": "Left ventral pontine infarction (Millard-Gubler syndrome) with ipsilateral CN VI and CN VII palsy and contralateral hemiparesis"
+        }
+      ],
+      "fhirFile": "/assets/fhir-james-wilson.json"
+    },
+    {
+      "name": "Linda Martinez",
+      "age": 58,
+      "gender": "female",
+      "existing_condition": "hypertension and hyperlipidemia",
+      "avatar": "/assets/patient-avatar-4.mp4",
+      "conditions": [
+        {
+          "id": "lateral-pontine",
+          "name": "Lateral Pontine Syndrome",
+          "description": "AICA territory infarction",
+          "reference_diagnosis": "Left lateral pontine infarction (AICA territory) with ipsilateral CN VII, CN VIII palsy, ataxia, and contralateral pain/temperature loss"
+        }
+      ],
+      "fhirFile": "/assets/fhir-linda-martinez.json"
+    },
+    {
+      "name": "David Kim",
+      "age": 70,
+      "gender": "male",
+      "existing_condition": "vertebral artery stenosis",
+      "avatar": "/assets/patient-avatar-5.mp4",
+      "conditions": [
+        {
+          "id": "medial-medullary",
+          "name": "Medial Medullary Syndrome",
+          "description": "Dejerine syndrome",
+          "reference_diagnosis": "Left medial medullary infarction (Dejerine syndrome) with ipsilateral CN XII palsy, contralateral hemiparesis, and contralateral proprioception loss"
+        }
+      ],
+      "fhirFile": "/assets/fhir-david-kim.json"
+    },
+    {
+      "name": "Sarah Johnson",
+      "age": 32,
+      "gender": "female",
+      "existing_condition": "no significant past medical history",
+      "avatar": "/assets/patient-avatar-6.mp4",
+      "conditions": [
+        {
+          "id": "ms-brainstem",
+          "name": "Multiple Sclerosis Brainstem",
+          "description": "Demyelinating lesion in brainstem",
+          "reference_diagnosis": "Multiple sclerosis with brainstem involvement causing internuclear ophthalmoplegia and sensory symptoms"
+        }
+      ],
+      "fhirFile": "/assets/fhir-sarah-johnson.json"
+    }
+  ]
+}

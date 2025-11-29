@@ -1,0 +1,100 @@
+{
+  "Weber Syndrome": [
+    "I've been having double vision for the past 2 days",
+    "My left eyelid has been drooping",
+    "My left eye seems to be looking down and out",
+    "My left pupil looks bigger than my right",
+    "I've noticed weakness on my right side - my right arm and leg feel heavy",
+    "I can't lift my right arm as well as before",
+    "My right leg drags when I walk",
+    "The weakness came on suddenly yesterday morning",
+    "I have a history of hypertension and diabetes",
+    "I might have some difficulty with fine motor tasks on my right hand"
+  ],
+  "Wallenberg Syndrome": [
+    "I've been having severe dizziness and vertigo since yesterday",
+    "The room feels like it's spinning",
+    "I have numbness on the left side of my face",
+    "My left eye feels smaller and the eyelid is drooping slightly",
+    "I'm having trouble swallowing - food gets stuck",
+    "My voice sounds hoarse",
+    "I feel unsteady when I walk, like I'm going to fall to the left",
+    "The right side of my body feels numb to pain and temperature",
+    "I can feel touch on my right side but not hot or cold",
+    "I might have some hiccups that won't stop",
+    "I might notice decreased sweating on the left side of my face"
+  ],
+  "Millard-Gubler Syndrome": [
+    "I can't move my left eye to the left side",
+    "I have double vision when looking to the left",
+    "The left side of my face is weak - I can't close my left eye completely",
+    "My smile is crooked, drooping on the left",
+    "My right arm and leg are weak",
+    "I'm having trouble walking because my right leg is weak",
+    "The weakness on my right side came on suddenly this morning",
+    "Food dribbles out of the left side of my mouth",
+    "I have high blood pressure that's been poorly controlled",
+    "I might have some slurred speech"
+  ],
+  "Lateral Pontine Syndrome": [
+    "I've lost hearing in my left ear suddenly",
+    "I have severe dizziness and the room is spinning",
+    "The left side of my face is completely numb",
+    "I can't close my left eye and my left face is drooping",
+    "I'm very unsteady when I walk and tend to fall to the left",
+    "I have ringing in my left ear (tinnitus)",
+    "The right side of my body feels numb to pinprick and temperature",
+    "I can't feel hot or cold on my right arm and leg",
+    "I feel nauseated and have vomited twice",
+    "I might have some jerking eye movements (nystagmus)"
+  ],
+  "Medial Medullary Syndrome": [
+    "My tongue deviates to the left when I stick it out",
+    "I have weakness on my right side - arm and leg",
+    "My right arm and leg feel clumsy and weak",
+    "I've lost the sense of position in my right arm and leg",
+    "I can't tell where my right hand is without looking at it",
+    "I have trouble feeling vibration on my right side",
+    "The weakness came on suddenly yesterday",
+    "I have difficulty with coordination on my right side",
+    "I tend to fall when I close my eyes (positive Romberg)",
+    "I might have some difficulty with speech articulation"
+  ],
+  "Midbrain Stroke": [
+    "I have double vision that started suddenly",
+    "My right eyelid is drooping",
+    "My right pupil is dilated and doesn't react to light",
+    "My right eye is looking down and out",
+    "I have weakness on my left side",
+    "My left arm and leg feel heavy and weak",
+    "I might have a tremor in my left hand",
+    "I have difficulty with coordination on my left side",
+    "I have a history of atrial fibrillation",
+    "I might have some visual problems or hallucinations"
+  ],
+  "Multiple Sclerosis Brainstem": [
+    "I've been having episodes of double vision that come and go",
+    "Sometimes my left eye doesn't move properly",
+    "I have numbness on the right side of my face",
+    "I've had episodes of vertigo in the past",
+    "I have weakness in my right leg that's been progressive",
+    "I feel electric shock sensations down my spine when I bend my neck (Lhermitte's sign)",
+    "I've had bladder problems - urgency and frequency",
+    "My vision was blurry in one eye a few months ago but got better",
+    "I'm only 32 years old",
+    "I might have some fatigue that gets worse with heat"
+  ],
+  "Basilar Artery Thrombosis": [
+    "I have severe dizziness and vertigo",
+    "I'm seeing double - everything appears twice",
+    "I have weakness in all four limbs - arms and legs",
+    "I'm having trouble speaking clearly - my speech is slurred",
+    "I have difficulty swallowing",
+    "I feel very unsteady and can't walk without support",
+    "I have numbness on both sides of my face",
+    "My vision is blurry or I'm seeing things",
+    "I feel very drowsy and confused",
+    "I might have a severe headache at the back of my head",
+    "I might have lost consciousness briefly"
+  ]
+}

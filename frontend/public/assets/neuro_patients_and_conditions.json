@@ -1,0 +1,116 @@
+{
+  "patients": [
+    {
+      "id": 1,
+      "name": "Robert Chen",
+      "age": 68,
+      "gender": "Male",
+      "existing_condition": "Hypertension and Type 2 Diabetes",
+      "img": "/assets/patient-neuro-1.avif",
+      "video": "/assets/patient-neuro-1.mp4",
+      "headshot": "/assets/patient-neuro-1-300.avif",
+      "fhirFile": "/assets/fhir-robert-chen.json",
+      "voice": "Algenib",
+      "ehr_summary": "68-year-old male with history of hypertension (on Lisinopril 20mg daily since 2010) and type 2 diabetes mellitus (on Metformin 1000mg BID since 2015). Also on Atorvastatin 40mg daily for hyperlipidemia. Recent BP 145/88, HbA1c 7.2%. No prior stroke or TIA. Non-smoker."
+    },
+    {
+      "id": 2,
+      "name": "Maria Santos",
+      "age": 72,
+      "gender": "Female",
+      "existing_condition": "Atrial Fibrillation and Hypertension",
+      "img": "/assets/patient-neuro-2.avif",
+      "video": "/assets/patient-neuro-2.mp4",
+      "headshot": "/assets/patient-neuro-2-300.avif",
+      "fhirFile": "/assets/fhir-maria-santos.json",
+      "voice": "Gacrux",
+      "ehr_summary": "72-year-old female with atrial fibrillation (on Apixaban 5mg BID) and hypertension (on Amlodipine 10mg daily). History of paroxysmal AF diagnosed 3 years ago. Recent echocardiogram showed normal LV function. No prior stroke. CHA2DS2-VASc score 4."
+    },
+    {
+      "id": 3,
+      "name": "James Wilson",
+      "age": 65,
+      "gender": "Male",
+      "existing_condition": "Poorly Controlled Hypertension and Smoking",
+      "img": "/assets/patient-neuro-3.avif",
+      "video": "/assets/patient-neuro-3.mp4",
+      "headshot": "/assets/patient-neuro-3-300.avif",
+      "fhirFile": "/assets/fhir-james-wilson.json",
+      "voice": "Algenib",
+      "ehr_summary": "65-year-old male with poorly controlled hypertension (BP often 160-170/90-100 despite Losartan 100mg daily). Active smoker, 40 pack-year history. Hyperlipidemia on Simvastatin 40mg daily. Carotid ultrasound 6 months ago showed mild bilateral stenosis (<50%). No prior stroke or TIA."
+    },
+    {
+      "id": 4,
+      "name": "Linda Martinez",
+      "age": 58,
+      "gender": "Female",
+      "existing_condition": "Hypertension and Hyperlipidemia",
+      "img": "/assets/patient-neuro-4.avif",
+      "video": "/assets/patient-neuro-4.mp4",
+      "headshot": "/assets/patient-neuro-4-300.avif",
+      "fhirFile": "/assets/fhir-linda-martinez.json",
+      "voice": "Callirrhoe",
+      "ehr_summary": "58-year-old female with hypertension (on Lisinopril 20mg and HCTZ 12.5mg daily) and hyperlipidemia (on Atorvastatin 80mg daily). Type 2 diabetes diagnosed 2 years ago, well-controlled on Metformin. Non-smoker. BMI 32. Recent labs show LDL 85, HbA1c 6.8%."
+    },
+    {
+      "id": 5,
+      "name": "David Kim",
+      "age": 70,
+      "gender": "Male",
+      "existing_condition": "Vertebral Artery Stenosis",
+      "img": "/assets/patient-neuro-5.avif",
+      "video": "/assets/patient-neuro-5.mp4",
+      "headshot": "/assets/patient-neuro-5-300.avif",
+      "fhirFile": "/assets/fhir-david-kim.json",
+      "voice": "Algenib",
+      "ehr_summary": "70-year-old male with known left vertebral artery stenosis (70% stenosis on CTA 1 year ago). History of hypertension and hyperlipidemia, both well-controlled on medications. Had vertebrobasilar TIA 18 months ago with transient vertigo and diplopia. On dual antiplatelet therapy (Aspirin 81mg + Clopidogrel 75mg daily)."
+    },
+    {
+      "id": 6,
+      "name": "Sarah Johnson",
+      "age": 32,
+      "gender": "Female",
+      "existing_condition": "No Significant Past Medical History",
+      "img": "/assets/patient-neuro-6.avif",
+      "video": "/assets/patient-neuro-6.mp4",
+      "headshot": "/assets/patient-neuro-6-300.avif",
+      "fhirFile": "/assets/fhir-sarah-johnson.json",
+      "voice": "Gacrux",
+      "ehr_summary": "32-year-old female with no significant past medical history. Had episode of optic neuritis in right eye 8 months ago that resolved with IV methylprednisolone. MRI brain at that time showed multiple periventricular white matter lesions. Lumbar puncture showed oligoclonal bands. Currently not on disease-modifying therapy, awaiting neurology follow-up."
+    }
+  ],
+  "conditions": [
+    {
+      "name": "Weber Syndrome",
+      "description": "Midbrain stroke affecting cerebral peduncle with ipsilateral CN III palsy and contralateral hemiparesis"
+    },
+    {
+      "name": "Wallenberg Syndrome",
+      "description": "Lateral medullary syndrome (PICA territory) with ipsilateral facial sensory loss, Horner's, ataxia, and contralateral body sensory loss"
+    },
+    {
+      "name": "Millard-Gubler Syndrome",
+      "description": "Ventral pontine stroke with ipsilateral CN VI and CN VII palsy and contralateral hemiparesis"
+    },
+    {
+      "name": "Lateral Pontine Syndrome",
+      "description": "AICA territory infarction with ipsilateral CN VII, CN VIII palsy, ataxia, and contralateral pain/temperature loss"
+    },
+    {
+      "name": "Medial Medullary Syndrome",
+      "description": "Dejerine syndrome with ipsilateral CN XII palsy, contralateral hemiparesis, and contralateral proprioception loss"
+    },
+    {
+      "name": "Multiple Sclerosis Brainstem",
+      "description": "Demyelinating lesion in brainstem causing internuclear ophthalmoplegia and sensory symptoms"
+    },
+    {
+      "name": "Midbrain Stroke",
+      "description": "Acute midbrain infarction with oculomotor deficits and motor symptoms"
+    },
+    {
+      "name": "Basilar Artery Thrombosis",
+      "description": "Occlusion of basilar artery causing bilateral brainstem symptoms and altered consciousness"
+    }
+  ]
+}
